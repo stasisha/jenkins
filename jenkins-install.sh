@@ -22,8 +22,7 @@ esac
 
 # Check wget
 if [ -e '/usr/bin/wget' ]; then
-    wget https://raw.githubusercontent.com/stasisha/jenkins/master/jenkins-install-$type.sh -O teamcity-install-$type.sh
-    if [ "$?" -eq '0' ]; then
+    wget https://raw.githubusercontent.com/stasisha/jenkins/master/jenkins-install-$type.sh -O jenkins-install-$type.sh
         bash jenkins-install-$type.sh $*
         exit
     else
