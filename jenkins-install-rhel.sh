@@ -1,17 +1,30 @@
 #!/bin/bash
 
+read -p 'Would you like to use SWAP? [y/n]: ' swap
 read -p 'Would you like to use https over nginx? [y/n]: ' nginx_answer
 
 #install lib
 yum install java-openjdk wget -y
 
+#creating SWAP
+if [ "$swap" == 'y' ] || [ "$swap" == 'Y'  ]; then
+    echo "Creating 4G SWAP file. This can take few minutes..."
+    fallocate -l 4G /swapfile
+    dd if=/dev/zero of=/swapfile count=4096 bs=1MiB
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+    echo '/swapfile   swap    swap    sw  0   0' >> /etc/fstab
+fi
+
+#install jenkins
 wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 yum install jenkins -y
-
 systemctl start jenkins.service
 systemctl enable jenkins.service
 
+#install nginx
 if [ "$nginx_answer" == 'y' ] || [ "$nginx_answer" == 'Y'  ]; then
   yum install nginx -y
   wget https://raw.githubusercontent.com/stasisha/jenkins/master/rhel/nginx.conf  -O /etc/nginx/nginx.conf
