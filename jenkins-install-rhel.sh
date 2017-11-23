@@ -34,3 +34,7 @@ if [ "$nginx_answer" == 'y' ] || [ "$nginx_answer" == 'Y'  ]; then
   systemctl enable nginx
   setsebool -P httpd_can_network_connect 1
 fi
+
+echo "Congratulations, you have just successfully installed Jenkins"
+pwd="$(cat /var/lib/jenkins/secrets/initialAdminPassword)"
+echo "Administrator password: $pwd"
