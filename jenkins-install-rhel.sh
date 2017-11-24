@@ -24,6 +24,9 @@ yum install jenkins -y
 systemctl start jenkins.service
 systemctl enable jenkins.service
 
+ip=$(curl ifconfig.co)
+location=$ip":8080"
+
 #install nginx
 if [ "$nginx_answer" == 'y' ] || [ "$nginx_answer" == 'Y'  ]; then
   yum install nginx -y
@@ -33,10 +36,18 @@ if [ "$nginx_answer" == 'y' ] || [ "$nginx_answer" == 'Y'  ]; then
   systemctl start nginx
   systemctl enable nginx
   setsebool -P httpd_can_network_connect 1
+  location=$ip
 fi
 
 curl -s localhost:8080 > /dev/null
-
-echo "Congratulations, you have just successfully installed Jenkins"
 pwd="$(cat /var/lib/jenkins/secrets/initialAdminPassword)"
-echo "Administrator password: $pwd"
+
+echo '======================================================='
+echo
+echo "    Congratulations, you have just successfully installed Jenkins"
+echo
+echo "    https://$location"
+echo "    Administrator password: $pwd"
+echo
+echo '======================================================='
+echo
