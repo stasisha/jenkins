@@ -42,12 +42,13 @@ fi
 curl -s localhost:8080 > /dev/null
 pwd="$(cat /var/lib/jenkins/secrets/initialAdminPassword)"
 
-echo '=================================================================='
+echo
+echo '================================================================='
 echo
 echo "    Congratulations, you have just successfully installed Jenkins"
 echo
 echo "    https://$location"
 echo "    Administrator password: $pwd"
 echo
-echo '=================================================================='
+echo '================================================================='
 echo
