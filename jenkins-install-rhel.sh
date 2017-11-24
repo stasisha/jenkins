@@ -35,7 +35,7 @@ if [ "$nginx_answer" == 'y' ] || [ "$nginx_answer" == 'Y'  ]; then
   setsebool -P httpd_can_network_connect 1
 fi
 
-curl localhost:8080
+curl -s localhost:8080 > /dev/null
 
 echo "Congratulations, you have just successfully installed Jenkins"
 pwd="$(cat /var/lib/jenkins/secrets/initialAdminPassword)"
