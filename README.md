@@ -6,13 +6,9 @@ __Connect to your server as root via SSH__
 ```
 ssh root@your.server
 ```
-__Download installation script__
+__Run the script and follow the assistant__
 ```
-curl -O https://raw.githubusercontent.com/stasisha/jenkins/master/jenkins-install.sh
-```
-__Run it__
-```
-bash jenkins-install.sh
+curl -L https://git.io/jeninst -o jeninst && bash jeninst
 ```
 ## Launch:
 Your instalation is available at http://your.server:8080
